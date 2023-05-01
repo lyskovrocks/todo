@@ -25,7 +25,9 @@ def todo_main(request):
 
 
     return render(request, 'todo_main.html', {
-        'tasks_array': TodoTask.objects.all().order_by('-id')
+        'tasks_array': TodoTask.objects.all().order_by('-id'),
+        'todo_count': TodoTask.objects.all().count()
+
     })
 
 
