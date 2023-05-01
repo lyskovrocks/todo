@@ -22,11 +22,10 @@ def todo_main(request):
             TodoTask.objects.get(pk=task_id).delete()
 
 
-    task_list = TodoTask.objects.all().order_by('-id')
-    return render(request, 'todo_main.html', {
-        'tasks_array': task_list,
-        'todo_count': task_list.count()
 
+
+    return render(request, 'todo_main.html', {
+        'tasks_array': TodoTask.objects.all().order_by('-id')
     })
 
 
