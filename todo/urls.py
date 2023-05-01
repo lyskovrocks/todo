@@ -4,5 +4,6 @@ from django.contrib import admin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth/', include('auth_app.urls')),
     path('todo/', include('todoapp.urls')),
 ]

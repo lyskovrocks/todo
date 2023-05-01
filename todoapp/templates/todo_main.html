@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="{% static 'todo_app/style.css' %}">
+</head>
+<body>
+<div id="app">
+    <section class="todoapp">
+        <header>
+
+            <h1>My TODO List</h1>
+        </header>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" class="new-todo" autofocus placeholder="Создать задачу" name="title">
+            <input type="hidden" name="type" value="create">
+            <input type="hidden" name="taskListId" value=1>
+        </form>
+
+        <main class="main">
+            <input id="toggle-all" type="checkbox" class="toggle-all"/>
+            <label for="toggle-all"></label>
+            <ul class="todo-list">
+                {% for task in tasks_array %}
+                    <li class="todo">
+                        <div class="view">
+                            <a href="">
+                                {% if task.status_id == 1 %}
+                                    <button class="toggle" aria-pressed="true"></button>
+                                {% else %}
+                                    <button class="toggle" aria-pressed="false"></button>
+                                {% endif %}
+                                <label for="">{{ task.title }}</label>
+                            </a>
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="type" value="destroy">
+                                <input type="hidden" name="task_id" value="{{ task.id }}">
+                                <button class="destroy"></button>
+                            </form>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </main>
+        <footer class='footer'>
+            <span class="todo-count"> <strong>10</strong> items left </span>
+            <ul class="filters">
+                <li>
+                    <a href="/">All</a>
+                </li>
+                <li>
+                    <a href="?status=no">Active</a>
+                </li>
+                <li>
+                    <a href="?status=yes">Completed</a>
+                </li>
+            </ul>
+            <form action="" method="GET">
+                <button class="clear-completed">
+                    Clear completed
+                </button>
+            </form>
+        </footer>
+    </section>
+</div>
+</body>
+</html>

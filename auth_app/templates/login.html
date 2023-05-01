@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}ЛОГИН{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Логин:
+            <input type="text" name="username">
+        </label>
+        <br>
+        <label for="password">Пароль:
+            <input type="text" name="password">
+        </label>
+        <br>
+        {% if error_message %}
+            <p>{{ error_message }}</p>
+        {% endif %}
+        <input type="submit" value = "Воити">
+        <a href={% url 'registration' %}>
+            <button type="button">Зарегистрироваться</button>
+        </a>
+    </form>
+{% endblock %}
+
+
+

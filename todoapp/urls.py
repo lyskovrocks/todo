@@ -1,9 +1,8 @@
 from django.urls import path
-from todoapp.views import index, buy
+from todoapp.views import todo_main
 from django.urls import include
 
 urlpatterns = [
-    path('', index),
-    path('buy/', buy),
-    #path('bye/', include('todoapp.urls')),
+    path('', todo_main, name = 'todo_main')
+
 ]

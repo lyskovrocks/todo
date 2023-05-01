@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}ИНФО{% endblock %}
+
+{% block content %}
+    <h1>{{ content }}</h1>
+    <a href="{% url 'login' %}"><button> Авторизация </button></a>
+    <a href="{% url 'todo_main' %}"><button> На главну </button></a>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}РЕГИСТРАЦИЯ{% endblock %}
+
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Логин:
+            <input type="text" name="username">
+        </label>
+        <br>
+        <label for="password">Пароль:
+            <input type="text" name="password">
+        </label>
+        <br>
+        <label for="password_confirm">Повторить пароль:
+            <input type="text" name="password_confirm">
+        </label>
+        <br>
+            <label for="email">Email:
+                <input type="text" name="email">
+            </label>
+        {% if error_message %}
+            <p>{{ error_message }}</p>
+        {% endif %}
+        <input type="submit" value = "Зарегистрироваться">
+    </form>
+{% endblock %}
+
+
+

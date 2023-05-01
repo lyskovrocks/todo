@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}ПОЛЬЗОВАТЕЛИ{% endblock %}
+
+{% block content %}
+
+<table>
+    <thead>
+        <tr>
+            <th>Логин</th>
+            <th>Админ</th>
+            <th>Емейл</th>
+            <th>Дата регистрации</th>
+            <th>Войти</th>
+            <th>Удалить</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.is_superuser }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.date_joined }}</td>
+        <td>
+            <form method="POST" action="{% url 'login_in_system' %}">
+                {% csrf_token %}
+                <input type="submit" value="{{ user.id }}" name="user_id">
+            </form>
+        </td>
+        <td>
+            <form method="POST" action="{% url 'delete_user' %}">
+                {% csrf_token %}
+                <input type="submit" value="{{ user.id }}" name="user_id">
+
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
