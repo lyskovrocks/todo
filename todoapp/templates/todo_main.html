@@ -1,4 +1,5 @@
 {% load static %}
+{% include 'nav.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +8,14 @@
     <link rel="stylesheet" href="{% static 'todo_app/style.css' %}">
 </head>
 <body>
+
+{% block nav %} {% endblock %}
+
 <div id="app">
     <section class="todoapp">
         <header>
 
-            <h1>My TODO List</h1>
+            <h1>{{ user.username }}</h1>
         </header>
         <form method="post">
             {% csrf_token %}
@@ -27,7 +31,7 @@
                 {% for task in tasks_array %}
                     <li class="todo">
                         <div class="view">
-                            <a href="">
+                            <a href="?type=change&task_id={{ task.id }}">
                                 {% if task.status_id == 1 %}
                                     <button class="toggle" aria-pressed="true"></button>
                                 {% else %}
@@ -50,7 +54,7 @@
             <span class="todo-count"> <strong>{{ todo_count }}</strong> items left </span>
             <ul class="filters">
                 <li>
-                    <a href="/">All</a>
+                    <a href="/todo/">All</a>
                 </li>
                 <li>
                     <a href="?status=no">Active</a>
@@ -59,7 +63,9 @@
                     <a href="?status=yes">Completed</a>
                 </li>
             </ul>
-            <form action="" method="GET">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="type" value="clear">
                 <button class="clear-completed">
                     Clear completed
                 </button>

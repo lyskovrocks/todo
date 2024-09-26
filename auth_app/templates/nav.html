@@ -1,0 +1,16 @@
+{% load static %}
+
+{% block nav %}
+    <link rel="stylesheet" href="{% static 'auth_app/nav.css' %}">
+    <nav>
+        <a class="logo" href="{% url 'todo_main' %}"> Главная </a>
+
+        <ul>{{ user.username }}
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Выйти</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Войти</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock %}
